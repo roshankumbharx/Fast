@@ -21,7 +21,7 @@ def view():
 
 @app.get('/about')
 def about():
-    return {'Aight this company is cool af...so do i think'}
+    return {'Aight this company is cool...so do i think'}
 
 #{patient_id} --> path parameter
 @app.get('/patient/{patient_id}')
@@ -36,8 +36,11 @@ def view_patient(patient_id:str=Path(...,description='patiend id in the DB',exam
     else:
         raise HTTPException(status_code=404,detail='Patient not found')
     
+    
+    # http://127.0.0.1:8000/sort?sort_by=height&order=desc
 @app.get('/sort')
-def sort_patients(sort_by:str=Query(...,description='Sort on the basis of height,weight or bmi'),order:str=Query('asc',description='sort in ascending or descending order')):
+def sort_patients(sort_by:str=Query(...,description='Sort on the basis of height,weight or bmi'),
+                  order:str=Query('asc',description='sort in ascending or descending order')):
     
     valid_fields={'height','weight','bmi'}
     
@@ -48,7 +51,7 @@ def sort_patients(sort_by:str=Query(...,description='Sort on the basis of height
         raise HTTPException(status_code=400,detail='select between asc or desc')
     
     data=load_data()
-    
+        
     sort_order =  True if order=='desc' else False
     
     sorted_data = sorted(data.values(),key= lambda x:x.get(sort_by,0),reverse=sort_order)
