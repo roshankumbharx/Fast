@@ -1,13 +1,16 @@
-from pydantic import BaseModel,EmailStr,AnyUrl
-from typing import List,Optional
+from pydantic import BaseModel,EmailStr,AnyUrl,Field
+from typing import List,Optional,Annotated
+
+# Field --> used for constraints 
+# Annotated --> used to write metadata
 
 class Patient(BaseModel):
-    name:str='Anonymmous'
+    name:Annotated[str,Field(default='Anonymous',max_length=50,title='Name of the patient',description='Your Government Name',examples=['Roshan','Rahul'])]
     email:EmailStr
     linkedin_profile_url:AnyUrl
     age:int
-    weight:float
-    allergies:Optional[List[str]] = None
+    weight:Annotated[float,Field(gt=0,strict=True)]   # bcoz of 'strict' ab '61.3' allow nhi krega ...bas float allow krega
+    allergies:Optional[List[str]] = Field(max_length=5)
     married:Optional[bool]=False
     
 
