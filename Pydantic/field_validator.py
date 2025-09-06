@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr, AnyUrl, Field,field_validator
 from typing import List, Dict, Optional, Annotated
 
 # field validtor is used for custom data validation  but only works for a single field 
-# if we want to validate dependent field ...then use @modelvalidator
+# if we want to validate dependent field i.e data validation depending upon more than one field...then use @modelvalidator
 
 class Patient(BaseModel):
 
