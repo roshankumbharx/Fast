@@ -5,7 +5,7 @@ from typing import List,Optional,Annotated
 # Annotated --> used to write metadata
 
 class Patient(BaseModel):
-    name:Annotated[str,Field(default='Anonymous',max_length=50,title='Name of the patient',description='Your Government Name',examples=['Roshan','Rahul'])]
+    name:Annotated[str,Field(...,default='Anonymous',max_length=50,title='Name of the patient',description='Your Government Name',examples=['Roshan','Rahul'])]
     email:EmailStr
     linkedin_profile_url:AnyUrl
     age:int
